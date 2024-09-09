@@ -24,6 +24,8 @@
 
     <footer>
         <div id='pdfExport'><a id="linkPdf" download="">exportar pdf</a></div>
+        <div id='exportCSV'><a id="linkCSV" download="">exportar CSV</a></div>
+        
     </footer>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>

@@ -12,16 +12,25 @@ jQuery(document).ready(function () {
 
 // Função para realizar a pesquisa
 function Pesquisar(valor) {
+
+    var chave = window.localStorage.getItem('key');
+    if (typeof chave === 'undefined' || chave === null) {
+        // Se a variável não existir ou for null, redireciona a página
+        alert("chave indosponível,  volte para a home e reinicie o processo de pesquisa "+chave);
+    }
+
+
     jQuery.ajax({
         url: pesquisaURL, // URL da API para pesquisa
         method: "GET", // Use 'POST' se você estiver enviando dados sensíveis ou grandes volumes de dados
         dataType: "json", // Tipo de dados esperados na resposta
-        data: { pesquisando: valor }, // Parâmetro da pesquisa adicionado à URL como parâmetros de consulta
+        data: { pesquisando: valor, key: chave }, // Parâmetro da pesquisa adicionado à URL como parâmetros de consulta
         success: function (response) {
             // Limpa o conteúdo da tabela antes de adicionar novos dados
             jQuery("#resultados tbody").empty(); // Alternativa mais eficiente para remover todos os filhos
 
             jQuery('#linkPdf').attr('href', response.filename);
+            jQuery('#linkCSV').attr('href', response.arquivocsv);
 
             if (response.success) {
                 // Verifica se a pesquisa foi bem-sucedida

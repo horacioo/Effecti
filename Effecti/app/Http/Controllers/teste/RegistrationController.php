@@ -22,7 +22,6 @@ class RegistrationController extends Controller
     /**aqui  é a  home do sistema**/
     public function index()
     {
-        session(['user_session_id' => (string) \Str::uuid()]);
         return view('cadastro.home');
     }
     /**************************************************************************************/
@@ -306,6 +305,12 @@ class RegistrationController extends Controller
     {
         $pesquisa = $request->input('pesquisando');
 
+        $filename = "";
+        if ($request->input('key')) {
+            $filename =  substr($request->input('key'), 6, 16) . ".pdf";
+        } else {
+            $filename = $_SERVER['REMOTE_ADDR'] . ".pdf";
+        }
 
         // Gerar um identificador único para o visitante não logado
         $visitorId =  $uuid = (string) \Str::uuid();
@@ -324,10 +329,10 @@ class RegistrationController extends Controller
                 ->orWhere('id', 'LIKE', "%{$pesquisa}%");
         })->get();
 
+        $arquivoCSV  = $this->gerarCSV($resultado, $filename);
+
         // Obtém o nome do usuário da sessão ou qualquer outra informação
         $user = Auth::user();
-        $username = $user ? $user->name : $visitorId;
-        $filename = "pesquisa_{$username}_" . date('Ymd') . '_' . $_SERVER['REMOTE_ADDR'] . '.pdf';
 
         // Gera o PDF a partir da visualização
         $pdf = Pdf::loadView('pdf.pesquisa', ['resultados' => $resultado]);
@@ -345,7 +350,68 @@ class RegistrationController extends Controller
         $pdf->save($path);
 
         // Retorna a resposta JSON
-        return response()->json(['success' => true, 'pesquisa' => $resultado, 'filename' => asset('storage/pdf/') . "/" . $filename]);
+        return response()->json(['success' => true, 'pesquisa' => $resultado, 'arquivocsv'=>asset($arquivoCSV) ,'filename' => asset('storage/pdf/') . "/" . $filename], );
+    }
+    /**************************************************************************************/
+
+
+
+
+
+
+    /**************************************************************************************/
+
+    private function gerarCSV($dados, $fileName) {
+        $data = array();
+        $linha = 0;
+    
+        // Construindo o array de dados
+        foreach ($dados as $x) {
+            $data[$linha] = array( 
+                "id" => $x['id'], 
+                "nome" => $x['nome'], 
+                "cpf" => $x['cpf'], 
+                "data_nascimento" => $x['data_nascimento'], 
+                "email" => $x['email'],
+                "telefone" => $x['telefone'],
+                "cep" => $x['cep'],
+                "estado" => $x['estado'],
+                "bairro" => $x['bairro'],
+                "cidade" => $x['cidade'],
+                "endereco" => $x['endereco'],
+                "status" => $x['status']  
+            );
+            $linha++;
+        }
+    
+
+
+         $nomeArquivo = explode('.',$fileName);
+
+        // Definindo o caminho do arquivo (mantendo o nome passado no argumento)
+        $filePath = storage_path('app/public/csv/' . $nomeArquivo[0].".csv");
+        
+        // Verifica e cria o diretório caso não exista
+        $directory = dirname($filePath);
+        if (!File::exists($directory)) {
+            File::makeDirectory($directory, 0755, true);
+        }
+    
+        // Abre o arquivo para escrita
+        $file = fopen($filePath, 'w');
+    
+        // Adiciona o cabeçalho ao CSV
+        fputcsv($file, ['id', 'nome', 'cpf', 'data_nascimento', 'email', 'telefone', 'cep', 'estado', 'bairro', 'cidade', 'endereco', 'status']);
+        
+        // Adiciona os dados ao CSV
+        foreach ($data as $row) {
+            fputcsv($file, $row);
+        }
+    
+        // Fecha o arquivo
+        fclose($file);
+    
+        return "storage/csv/" . $nomeArquivo[0].".csv"; // Retorna o caminho do arquivo gerado
     }
     /**************************************************************************************/
 }
