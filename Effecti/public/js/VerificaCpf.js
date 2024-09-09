@@ -1,36 +1,44 @@
-
-jQuery('#cpf').change(function(){
-    // Pega o valor do campo de CEP
+// Adiciona um ouvinte de eventos para mudanças no campo de CPF
+jQuery('#cpf').change(function() {
+    // Obtém o valor do campo de CPF
     var valor = jQuery("#cpf").val(); 
-    // Chama a função buscaCEP passando o valor do CEP do campo
+    // Chama a função PesquisaCpf passando o valor do CPF do campo
     PesquisaCpf(valor);
 });
 
-
+// Função para pesquisar informações relacionadas ao CPF
 function PesquisaCpf(cpf) {
-    // URL da API com o CEP passado como parâmetro
-    var apiURL = UrlVerificaCpf;  
-    var data = { 'cpf': cpf }
-    if (typeof idUsuario !== 'undefined') { data.id = idUsuario;  }
+    // Define a URL da API para verificar o CPF
+    var apiURL = UrlVerificaCpf;  // URL da API para verificação de CPF
+    var data = { 'cpf': cpf }; // Dados a serem enviados na requisição
 
-    // Fazendo a requisição AJAX com jQuery
+    // Adiciona o idUsuario aos dados se estiver definido
+    if (typeof idUsuario !== 'undefined') { 
+        data.id = idUsuario;  
+    }
+
+    // Realiza a requisição AJAX com jQuery
     jQuery.ajax({
-        url: apiURL,
-        method: 'GET', // Ou 'POST' dependendo do que você deseja
-        dataType: 'json',
-        data: data, // Para GET, os parâmetros são passados na URL. Para POST, isso está correto.
+        url: apiURL, // URL da API para onde a requisição será enviada
+        method: 'GET', // Método HTTP para a requisição; pode ser 'POST' se necessário
+        dataType: 'json', // Tipo de dados esperado na resposta
+        data: data, // Dados a serem enviados na requisição; para GET, eles são passados na URL
         success: function(data) {
-            // Exibe os dados retornados pela API no console
-            console.log(data.informacao);
-            if(data.informacao == true)
-                {}
-                else 
-                { alert(data.informacao); }
+            // Função executada em caso de sucesso na requisição
+            console.log(data.informacao); // Exibe os dados retornados pela API no console para depuração
+            
+            // Verifica se a informação retornada é verdadeira
+            if (data.informacao == true) {
+                // Se verdadeiro, nada é feito; pode-se adicionar lógica aqui se necessário
+            } else {
+                // Se falso, exibe um alerta com a informação retornada pela API
+                alert(data.informacao);
+            }
         },
         error: function(xhr, status, error) {
-            // Tratamento de erro
-            console.log(error);
-            jQuery("#resposta").text("Erro ao buscar o cpf.");
+            // Função executada em caso de erro na requisição
+            console.log(error); // Exibe o erro no console para depuração
+            jQuery("#resposta").text("Erro ao buscar o CPF."); // Exibe uma mensagem de erro para o usuário
         } 
     });
 }

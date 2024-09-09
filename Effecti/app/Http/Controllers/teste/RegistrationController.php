@@ -5,11 +5,47 @@ namespace App\Http\Controllers\teste;
 use App\Http\Controllers\Controller;
 use App\Models\Registration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PharIo\Manifest\Email;
-
+use PDF;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class RegistrationController extends Controller
 {
+
+
+
+
+
+    /**************************************************************************************/
+    /**aqui  é a  home do sistema**/
+    public function index()
+    {
+        session(['user_session_id' => (string) \Str::uuid()]);
+        return view('cadastro.home');
+    }
+    /**************************************************************************************/
+
+
+
+
+    /**************************************************************************************/
+    /**aqui  é a  tela do cadastro**/
+    public function Cadastrar()
+    {
+        return view('cadastro.cadastro');
+    }
+    /**************************************************************************************/
+
+
+
+
+
+
+
+
+
     /**************************************************************************************/
     public function verificaEmail(Request $request)
     {
@@ -258,6 +294,58 @@ class RegistrationController extends Controller
 
             return redirect()->route('cadastro.lista');
         }
+    }
+    /**************************************************************************************/
+
+
+
+
+    /**************************************************************************************/
+
+    public function pesquisar(Request $request)
+    {
+        $pesquisa = $request->input('pesquisando');
+
+
+        // Gerar um identificador único para o visitante não logado
+        $visitorId =  $uuid = (string) \Str::uuid();
+        if (!$visitorId) {
+            $visitorId = uniqid('visitor_', true);
+            session()->put('visitor_id', $visitorId);
+        }
+
+
+        // Consulta aos resultados
+        $resultado = Registration::where(function ($query) use ($pesquisa) {
+            $query->where('nome', 'LIKE', "%{$pesquisa}%")
+                ->orWhere('cpf', 'LIKE', "%{$pesquisa}%")
+                ->orWhere('email', 'LIKE', "%{$pesquisa}%")
+                ->orWhere('endereco', 'LIKE', "%{$pesquisa}%")
+                ->orWhere('id', 'LIKE', "%{$pesquisa}%");
+        })->get();
+
+        // Obtém o nome do usuário da sessão ou qualquer outra informação
+        $user = Auth::user();
+        $username = $user ? $user->name : $visitorId;
+        $filename = "pesquisa_{$username}_" . date('Ymd') . '_' . $_SERVER['REMOTE_ADDR'] . '.pdf';
+
+        // Gera o PDF a partir da visualização
+        $pdf = Pdf::loadView('pdf.pesquisa', ['resultados' => $resultado]);
+
+        // Caminho onde o PDF será salvo
+        $path = storage_path('app/public/pdf/' . $filename);
+
+        // Verifica se o diretório existe, se não, cria
+        $directory = dirname($path);
+        if (!File::exists($directory)) {
+            File::makeDirectory($directory, 0755, true);
+        }
+
+        // Salva o PDF
+        $pdf->save($path);
+
+        // Retorna a resposta JSON
+        return response()->json(['success' => true, 'pesquisa' => $resultado, 'filename' => asset('storage/pdf/') . "/" . $filename]);
     }
     /**************************************************************************************/
 }

@@ -1,14 +1,7 @@
 @extends('cadastro.layout.layout')
 
 @section('header')
-    <header>
-        <nav>
-            <ul>
-                <li><a class="buttom" href="{{ route('cadastro.lista') }}">Lista</a></li>
-                <li><a class="buttom" href="{{ route('cadastro.registrar') }}">Cadastrar</a></li>
-            </ul>
-        </nav>
-    </header>
+   
     <script>
         var salvarUrl = "{{ route('salvarCadastro') }}";
         var UrlEmail = "{{ route('VerificaEmail') }}";

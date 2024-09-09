@@ -7,7 +7,16 @@
 @endsection
 
 @section('content')
-     bem vindo!
+    <form action="" id="Pesquisa">
+        <label>Pesquisar: <input type="text" id="pesquisa" name="pesquisando" /></label>
+    </form>
+    <table id="resultados">
+        <tbody></tbody>
+    </table>
+
+
+
+    <div id="resposta"></div>
 @endsection
 
 

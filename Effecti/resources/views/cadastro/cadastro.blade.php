@@ -1,14 +1,7 @@
 @extends('cadastro.layout.layout')
 
 @section('header')
-    <header>
-        <nav>
-            <ul>
-                <li><a class="buttom" href="{{ route('cadastro.lista') }}">Lista</a></li>
-                <li><a class="buttom" href="{{ route('cadastro.registrar') }}">Cadastrar</a></li>
-            </ul>
-        </nav>
-    </header>
+    
     <script>
         var salvarUrl = "{{ route('salvarCadastro') }}";
         var UrlEmail = "{{ route('VerificaEmail') }}";
@@ -18,18 +11,18 @@
 
 @section('content')
     <form action="" id="cadastro">
-        <label>Nome: <input type="text" name="nome" /></label>
-        <label>Cpf: <input type="text" name="cpf" id="cpf" /></label>
-        <label>Data De Nascimento: <input type="date" name="nascimento" /></label>
-        <label>E-mail: <input type="email" id="email" name="email" />
+        <label>Nome: <input required type="text" name="nome" /></label>
+        <label>Cpf: <input  required type="text" name="cpf" id="cpf" /></label>
+        <label>Data De Nascimento: <input  required type="date" name="nascimento" /></label>
+        <label>E-mail: <input  required  type="email" id="email" name="email" />
             <div class='alerta'></div>
         </label>
-        <label>Telefone: <input type="tel" name="telefone" /></label>
-        <label>Cep: <input type="text" id='cep' name="cep" /></label>
-        <label>endereço: <input type="text" id="endereco" name="endereco" /></label>
-        <label>bairro: <input type="text" id="bairro" name="bairro" /></label>
-        <label>cidade: <input type="text" id="cidade" name="cidade" /></label>
-        <label>estado: <input type="text" id="estado" name="estado" /></label>
+        <label>Telefone: <input required  type="tel" name="telefone" /></label>
+        <label>Cep: <input required  type="text" id='cep' name="cep" /></label>
+        <label>endereço: <input required  type="text" id="endereco" name="endereco" /></label>
+        <label>bairro: <input required  type="text" id="bairro" name="bairro" /></label>
+        <label>cidade: <input  required type="text" id="cidade" name="cidade" /></label>
+        <label>estado: <input  required type="text" id="estado" name="estado" /></label>
         <input class='buttom' type="submit" value="Cadastrar">
     </form>
     <div id="resposta"></div>

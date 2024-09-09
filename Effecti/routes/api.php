@@ -24,3 +24,4 @@ Route::post('/Cadastro/Registra', [RegistrationController::class, 'salva'])->nam
 Route::get('/Cadastro/Email/Verifica', [RegistrationController::class, 'VerificaEmail'])->name("VerificaEmail");
 Route::get('/Cadastro/Cpf/Verifica', [RegistrationController::class, 'validaCPF'])->name("VerificaCpf");
 Route::put('/Cadastro/editar/commit', [RegistrationController::class, 'update'])->name("salvarEdicao");
+Route::get('/Cadastro/consultar', [RegistrationController::class, 'pesquisar'])->name("pesquisa");

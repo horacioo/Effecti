@@ -14,6 +14,8 @@
     @yield('header')
     <!------------->
 
+    @include('cadastro.layout.menu')
+
     <!-- Main content -->
     <div class="container">
         @yield('content')
