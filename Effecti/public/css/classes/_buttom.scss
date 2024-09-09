@@ -1,0 +1,22 @@
+@import "../cores/cores";
+
+.buttom {
+    background-color: $cor1;
+    border-radius: 0.2vw;
+    color: white;
+    display: inline-block;
+    border: none;
+    padding: 1vw;
+    text-transform: uppercase;
+    text-decoration: none;
+    
+    &:hover{
+        animation: mudaCor 300ms forwards;
+    }
+} 
+
+
+@keyframes mudaCor{
+    0%{background-color: $cor1;}
+    100%{background-color: $cor2;}
+}

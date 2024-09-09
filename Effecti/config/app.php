@@ -181,6 +181,15 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+     
+         /*
+         * Pacotes de terceiros...
+         */
+        Barryvdh\DomPDF\ServiceProvider::class, // <== Provider do DomPDF
+
+        /*
+         * Application Service Providers...
+         */
 
         /*
          * Package Service Providers...
@@ -210,6 +219,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
 
 ];

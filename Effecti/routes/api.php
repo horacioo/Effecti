@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\teste\RegistrationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::post('/Cadastro/Registra', [RegistrationController::class, 'salva'])->name("salvarCadastro");
+Route::get('/Cadastro/Email/Verifica', [RegistrationController::class, 'VerificaEmail'])->name("VerificaEmail");
+Route::get('/Cadastro/Cpf/Verifica', [RegistrationController::class, 'validaCPF'])->name("VerificaCpf");
+Route::put('/Cadastro/editar/commit', [RegistrationController::class, 'update'])->name("salvarEdicao");
