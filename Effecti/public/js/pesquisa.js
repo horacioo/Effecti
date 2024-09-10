@@ -31,6 +31,7 @@ function Pesquisar(valor) {
 
             jQuery('#linkPdf').attr('href', response.filename);
             jQuery('#linkCSV').attr('href', response.arquivocsv);
+            jQuery('#linkXLS').attr('href', response.arquivoxls);
 
             if (response.success) {
                 // Verifica se a pesquisa foi bem-sucedida
@@ -67,10 +68,7 @@ function Pesquisar(valor) {
                             item.cidade +
                             ", " +
                             item.estado +
-                            "</td>" +
-                            "<td> ver detalhes: " +
-                            item.id +
-                            "</td>" +
+                            "</td>"+
                             "</tr>"
                     );
                     i++;

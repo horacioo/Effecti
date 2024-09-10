@@ -6,102 +6,77 @@ use App\Http\Controllers\Controller;
 use App\Models\Registration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PharIo\Manifest\Email;
-use PDF;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PDF;
 
 class RegistrationController extends Controller
 {
+    private $NomeArquivo;
 
 
 
 
-
-    /**************************************************************************************/
-    /**aqui  é a  home do sistema**/
     public function index()
     {
         return view('cadastro.home');
     }
-    /**************************************************************************************/
+    
+    
 
 
 
-
-    /**************************************************************************************/
-    /**aqui  é a  tela do cadastro**/
     public function Cadastrar()
     {
         return view('cadastro.cadastro');
     }
-    /**************************************************************************************/
 
 
 
 
 
 
-
-
-
-    /**************************************************************************************/
     public function verificaEmail(Request $request)
     {
-        // Obtenha o email da requisição
         $email = $request->input('email');
+        $reg = Registration::where('email', $email)
+            ->when($request->has('id'), function ($query) use ($request) {
+                return $query->where('id', '!=', $request->input('id'));
+            })
+            ->first();
 
-        // Verifique se um ID foi passado na requisição
-        if ($request->has('id')) {
-            // Se o ID foi passado, busque o registro pelo email e pelo ID
-            $reg = Registration::where('email', $email)
-                ->when($request->has('id'), function ($query) use ($request) {
-                    return $query->where('id', '!=', $request->input('id'));
-                })
-                ->first();
-        } else {
-            // Se o ID não foi passado, busque apenas pelo email
-            $reg = Registration::where('email', $email)->first();
-        }
-
-        // Retorne a resposta JSON com a informação
         if ($reg) {
             return response()->json(['informacao' => 'Email encontrado']);
         } else {
             return response()->json(['informacao' => 'Email não encontrado']);
         }
     }
-    /**************************************************************************************/
 
 
 
 
 
-    /**************************************************************************************/
     public function validaCPF(Request $request)
     {
         $cpf = $request->input('cpf');
         $id = $request->input('id', null);
 
-        // Verifica se o CPF é único, excluindo o próprio registro (se o ID estiver presente)
         if (!$this->validaCPFunico($cpf, $id)) {
             return response()->json(['informacao' => 'CPF já existe!']);
         }
 
-        // Remove qualquer máscara como pontos, traços ou espaços
         $cpf = preg_replace('/[^0-9]/', '', $cpf);
 
-        // Verifica se o CPF tem exatamente 11 dígitos
         if (strlen($cpf) != 11) {
             return response()->json(['informacao' => 'CPF inválido']);
         }
 
-        // Verifica se todos os números são iguais, o que invalida o CPF (ex: 111.111.111-11)
         if (preg_match('/(\d)\1{10}/', $cpf)) {
             return response()->json(['informacao' => 'CPF inválido']);
         }
 
-        // Cálculo para o primeiro dígito verificador
         for ($t = 9; $t < 11; $t++) {
             $d = 0;
             for ($c = 0; $c < $t; $c++) {
@@ -116,83 +91,67 @@ class RegistrationController extends Controller
         return response()->json(['informacao' => 'CPF válido']);
     }
 
-    /**************************************************************************************/
 
 
 
-    /**************************************************************************************/
-    /**************************************************************************************/
+
     private function validaCPFunico($cpf, $id = null)
     {
-        // Se o $id for fornecido, busca registros com o mesmo CPF, mas exclui o registro com o ID fornecido
         if ($id) {
             $registro = Registration::where('cpf', $cpf)->where('id', '!=', $id)->first();
         } else {
-            // Caso contrário, busca se o CPF já existe no banco de dados
             $registro = Registration::where('cpf', $cpf)->first();
         }
 
-        // Retorna true se o CPF não for encontrado (ou seja, é único)
-        if (!$registro) {
-            return true;
-        }
-
-        // Retorna false se o CPF for encontrado (ou seja, não é único)
-        return false;
+        return !$registro;
     }
-    /**************************************************************************************/
 
 
 
 
-    /**************************************************************************************/
+
+
+
+
     public function Salva(Request $request)
     {
-
         try {
-
-            // Criação e preenchimento do modelo Registration
             $reg = new Registration();
-            $reg->nome             = $request->nome;
-            $reg->cpf              = $request->cpf;
-            $reg->data_nascimento  = $request->nascimento;
-            $reg->email            = $request->email;
-            $reg->telefone         = $request->telefone;
-            $reg->cep              = $request->cep;
-            $reg->estado           = $request->estado;
-            $reg->bairro           = $request->bairro;
-            $reg->cidade           = $request->cidade;
-            $reg->endereco         = $request->endereco;
-            $reg->status           = '1'; // Ou qualquer outro valor padrão que você queira usar
+            $reg->nome = $request->nome;
+            $reg->cpf = $request->cpf;
+            $reg->data_nascimento = $request->nascimento;
+            $reg->email = $request->email;
+            $reg->telefone = $request->telefone;
+            $reg->cep = $request->cep;
+            $reg->estado = $request->estado;
+            $reg->bairro = $request->bairro;
+            $reg->cidade = $request->cidade;
+            $reg->endereco = $request->endereco;
+            $reg->status = '1';
 
-            // Salvando o registro no banco de dados
             $reg->save();
 
-            // Retornando uma resposta JSON com os dados salvos
             return response()->json([
                 'success' => true,
                 'message' => 'Registro salvo com sucesso!',
-                'data'    => $reg
-            ], 201); // Código de status HTTP 201 para criação bem-sucedida
+                'data' => $reg
+            ], 201);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
-            // Tratamento de erros de validação
             return response()->json([
                 'success' => false,
                 'message' => 'Erro na validação dos dados.',
-                'errors'  => $e->errors()
-            ], 422); // Código de status HTTP 422 para erro de validação
+                'errors' => $e->errors()
+            ], 422);
 
         } catch (\Exception $e) {
-            // Tratamento de outros tipos de erros
             return response()->json([
                 'success' => false,
                 'message' => 'Ocorreu um erro ao salvar o registro.',
-                'error'   => $e->getMessage()
-            ], 500); // Código de status HTTP 500 para erro interno do servidor
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
-    /**************************************************************************************/
 
 
 
@@ -200,37 +159,23 @@ class RegistrationController extends Controller
 
 
 
-
-
-
-
-
-
-    /**************************************************************************************/
-    /**************************************************************************************/
-    /**************************************************************************************/
-    /**************************************************************************************/
-    /**************************************************************************************/
 
     public function update(Request $request)
     {
-        // Apenas para depuração: exibe todos os dados recebidos
-        //return json_encode($request->id);
-
         $id = $request->id;
         $registro = Registration::find($id);
 
         if ($registro) {
-            $registro->nome             = $request->nome;
-            $registro->cpf              = $request->cpf;
-            $registro->data_nascimento  = $request->nascimento;
-            $registro->email            = $request->email;
-            $registro->telefone         = $request->telefone;
-            $registro->cep              = $request->cep;
-            $registro->estado           = $request->estado;
-            $registro->bairro           = $request->bairro;
-            $registro->cidade           = $request->cidade;
-            $registro->endereco         = $request->endereco;
+            $registro->nome = $request->nome;
+            $registro->cpf = $request->cpf;
+            $registro->data_nascimento = $request->nascimento;
+            $registro->email = $request->email;
+            $registro->telefone = $request->telefone;
+            $registro->cep = $request->cep;
+            $registro->estado = $request->estado;
+            $registro->bairro = $request->bairro;
+            $registro->cidade = $request->cidade;
+            $registro->endereco = $request->endereco;
 
             $registro->save();
 
@@ -239,11 +184,6 @@ class RegistrationController extends Controller
 
         return response()->json(['success' => false, 'message' => 'Registro não encontrado!'], 404);
     }
-    /**************************************************************************************/
-    /**************************************************************************************/
-    /**************************************************************************************/
-    /**************************************************************************************/
-    /**************************************************************************************/
 
 
 
@@ -252,75 +192,58 @@ class RegistrationController extends Controller
 
 
 
-
-
-    /**************************************************************************************/
     public function lista()
     {
-        $reg = new Registration();
-        $registros = $reg::where('status', '1')->take(500)->get();
+        $registros = Registration::where('status', '1')->take(20)->get();
         return view('cadastro.lista', ['registros' => $registros]);
     }
-    /**************************************************************************************/
 
 
 
-    /**************************************************************************************/
+
+
     public function Editar($id)
     {
-        $reg = new Registration();
         $registro = Registration::find($id);
         if (!$registro) {
             return "registro não localizado";
         }
-
         return view('cadastro.editar', ['registro' => $registro]);
     }
-    /**************************************************************************************/
 
 
-    /**************************************************************************************/
+
+
+
+
+
+
+
+
     public function Deletar($id)
     {
-        $reg = new Registration();
         $registro = Registration::find($id);
         if (!$registro) {
             return "registro não localizado";
         } else {
-
             $registro->status = 0;
             $registro->save();
-
             return redirect()->route('cadastro.lista');
         }
     }
-    /**************************************************************************************/
 
 
 
 
-    /**************************************************************************************/
+
 
     public function pesquisar(Request $request)
     {
         $pesquisa = $request->input('pesquisando');
+        $filename = $request->input('key') ? substr($request->input('key'), 6, 16) . ".pdf" : $_SERVER['REMOTE_ADDR'] . ".pdf";
+        $visitorId = (string) \Str::uuid();
+        session()->put('visitor_id', $visitorId);
 
-        $filename = "";
-        if ($request->input('key')) {
-            $filename =  substr($request->input('key'), 6, 16) . ".pdf";
-        } else {
-            $filename = $_SERVER['REMOTE_ADDR'] . ".pdf";
-        }
-
-        // Gerar um identificador único para o visitante não logado
-        $visitorId =  $uuid = (string) \Str::uuid();
-        if (!$visitorId) {
-            $visitorId = uniqid('visitor_', true);
-            session()->put('visitor_id', $visitorId);
-        }
-
-
-        // Consulta aos resultados
         $resultado = Registration::where(function ($query) use ($pesquisa) {
             $query->where('nome', 'LIKE', "%{$pesquisa}%")
                 ->orWhere('cpf', 'LIKE', "%{$pesquisa}%")
@@ -329,89 +252,141 @@ class RegistrationController extends Controller
                 ->orWhere('id', 'LIKE', "%{$pesquisa}%");
         })->get();
 
-        $arquivoCSV  = $this->gerarCSV($resultado, $filename);
 
-        // Obtém o nome do usuário da sessão ou qualquer outra informação
-        $user = Auth::user();
+        $NomeArquivo = explode(".",$filename);
+        $this->NomeArquivo = $NomeArquivo[0];
 
-        // Gera o PDF a partir da visualização
-        $pdf = Pdf::loadView('pdf.pesquisa', ['resultados' => $resultado]);
+        $arquivoCSV = $this->gerarCSV($resultado, $filename);
+        $xls        = $this->gerarXLS($resultado,"novo");
 
-        // Caminho onde o PDF será salvo
+        $pdf = PDF::loadView('pdf.pesquisa', ['resultados' => $resultado]);
+
         $path = storage_path('app/public/pdf/' . $filename);
-
-        // Verifica se o diretório existe, se não, cria
         $directory = dirname($path);
         if (!File::exists($directory)) {
             File::makeDirectory($directory, 0755, true);
         }
 
-        // Salva o PDF
         $pdf->save($path);
 
-        // Retorna a resposta JSON
-        return response()->json(['success' => true, 'pesquisa' => $resultado, 'arquivocsv'=>asset($arquivoCSV) ,'filename' => asset('storage/pdf/') . "/" . $filename], );
+        return response()->json([
+            'primeiroFileName' => $this->NomeArquivo,
+            'success' => true,
+            'pesquisa' => $resultado,
+            'arquivocsv' => asset($arquivoCSV),
+            'filename' => asset('storage/pdf/') . "/" . $filename,
+            'arquivoxls' => asset('') . "" . $xls
+        ]);
     }
-    /**************************************************************************************/
 
 
 
 
 
 
-    /**************************************************************************************/
 
-    private function gerarCSV($dados, $fileName) {
-        $data = array();
+
+
+
+    private function gerarCSV($dados, $fileName)
+    {
+        $data = [];
         $linha = 0;
-    
-        // Construindo o array de dados
+
         foreach ($dados as $x) {
-            $data[$linha] = array( 
-                "id" => $x['id'], 
-                "nome" => $x['nome'], 
-                "cpf" => $x['cpf'], 
-                "data_nascimento" => $x['data_nascimento'], 
+            $data[$linha] = [
+                "id" => $x['id'],
+                "nome" => $x['nome'],
+                "cpf" => $x['cpf'],
+                "data_nascimento" => $x['data_nascimento'],
                 "email" => $x['email'],
                 "telefone" => $x['telefone'],
                 "cep" => $x['cep'],
                 "estado" => $x['estado'],
                 "bairro" => $x['bairro'],
                 "cidade" => $x['cidade'],
-                "endereco" => $x['endereco'],
-                "status" => $x['status']  
-            );
+                "endereco" => $x['endereco']
+            ];
             $linha++;
         }
+
+        $arquivo = storage_path('app/public/csv/' . $this->NomeArquivo.".csv");
+
+        $fp = fopen($arquivo, 'w');
+
+        fputcsv($fp, ['id', 'Nome', 'Cpf', 'Data de Nascimento', 'E-mail', 'Telefone', 'Cep', 'Estado', 'Bairro', 'Cidade', 'Endereco', 'Status']);
     
-
-
-         $nomeArquivo = explode('.',$fileName);
-
-        // Definindo o caminho do arquivo (mantendo o nome passado no argumento)
-        $filePath = storage_path('app/public/csv/' . $nomeArquivo[0].".csv");
-        
-        // Verifica e cria o diretório caso não exista
-        $directory = dirname($filePath);
-        if (!File::exists($directory)) {
-            File::makeDirectory($directory, 0755, true);
+        foreach ($data as $linha) {
+            fputcsv($fp, $linha);
         }
-    
-        // Abre o arquivo para escrita
-        $file = fopen($filePath, 'w');
-    
-        // Adiciona o cabeçalho ao CSV
-        fputcsv($file, ['id', 'nome', 'cpf', 'data_nascimento', 'email', 'telefone', 'cep', 'estado', 'bairro', 'cidade', 'endereco', 'status']);
-        
-        // Adiciona os dados ao CSV
-        foreach ($data as $row) {
-            fputcsv($file, $row);
-        }
-    
-        // Fecha o arquivo
-        fclose($file);
-    
-        return "storage/csv/" . $nomeArquivo[0].".csv"; // Retorna o caminho do arquivo gerado
+
+        fclose($fp);
+
+        return 'storage/csv/' . $this->NomeArquivo;
     }
-    /**************************************************************************************/
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    private function gerarXLS($dados, $fileName)
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+    
+        $sheet->setCellValue('A1', 'ID');
+        $sheet->setCellValue('B1', 'Nome');
+        $sheet->setCellValue('C1', 'CPF');
+        $sheet->setCellValue('D1', 'Data de Nascimento');
+        $sheet->setCellValue('E1', 'Email');
+        $sheet->setCellValue('F1', 'Telefone');
+        $sheet->setCellValue('G1', 'CEP');
+        $sheet->setCellValue('H1', 'Estado');
+        $sheet->setCellValue('I1', 'Bairro');
+        $sheet->setCellValue('J1', 'Cidade');
+        $sheet->setCellValue('K1', 'Endereço');
+    
+        $row = 2;
+        foreach ($dados as $x) {
+            $sheet->setCellValue('A' . $row, $x->id);
+            $sheet->setCellValue('B' . $row, $x->nome);
+            $sheet->setCellValue('C' . $row, $x->cpf);
+            $sheet->setCellValue('D' . $row, $x->data_nascimento);
+            $sheet->setCellValue('E' . $row, $x->email);
+            $sheet->setCellValue('F' . $row, $x->telefone);
+            $sheet->setCellValue('G' . $row, $x->cep);
+            $sheet->setCellValue('H' . $row, $x->estado);
+            $sheet->setCellValue('I' . $row, $x->bairro);
+            $sheet->setCellValue('J' . $row, $x->cidade);
+            $sheet->setCellValue('K' . $row, $x->endereco);
+            $row++;
+        }
+    
+        $writer = new Xlsx($spreadsheet);
+    
+        // Caminho do diretório onde o arquivo será salvo
+        $path = storage_path('app/public/xlsx/');
+    
+        // Verifica se o diretório existe, se não existir, cria-o
+        if (!File::exists($path)) {
+            File::makeDirectory($path, 0755, true);
+        }
+    
+        // Salva o arquivo XLSX
+        $filePath = $path . $this->NomeArquivo . '.xlsx';
+        $writer->save($filePath);
+    
+        return 'storage/xlsx/' . $this->NomeArquivo . '.xlsx';
+    }
+
 }

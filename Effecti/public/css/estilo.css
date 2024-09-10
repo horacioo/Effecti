@@ -1,5 +1,5 @@
 .buttom {
-  background-color: rgb(0, 87, 104);
+  background-color: rgb(0, 69, 88);
   border-radius: 0.2vw;
   color: white;
   display: inline-block;
@@ -14,19 +14,52 @@
 
 @keyframes mudaCor {
   0% {
-    background-color: rgb(0, 87, 104);
+    background-color: rgb(0, 69, 88);
   }
   100% {
-    background-color: rgb(163, 128, 0);
+    background-color: #be2900;
   }
 }
+.icon1 {
+  border-radius: 0.2vw;
+  background-image: url("../css/img/icones.svg");
+  background-size: cover;
+  width: 46px;
+  height: 46px;
+  display: inline-block;
+  border: 1px solid rgb(0, 69, 88);
+  background-position-x: 0px;
+}
+
+.icon2 {
+  border-radius: 0.2vw;
+  background-image: url("../css/img/icones.svg");
+  background-size: cover;
+  width: 46px;
+  height: 46px;
+  display: inline-block;
+  border: 1px solid rgb(0, 69, 88);
+  background-position-x: -56px;
+}
+
+.icon3 {
+  border-radius: 0.2vw;
+  background-image: url("../css/img/icones.svg");
+  background-size: cover;
+  width: 46px;
+  height: 46px;
+  display: inline-block;
+  border: 1px solid rgb(0, 69, 88);
+  background-position-x: -114px;
+}
+
 @media (min-width: 10px) and (max-width: 500px) {
   body {
     box-sizing: border-box;
     max-width: 99vw;
     position: relative;
     overflow-x: hidden;
-    background: linear-gradient(to bottom, rgb(0, 87, 104), #006072);
+    background: linear-gradient(to bottom, rgb(0, 69, 88), #004d62);
     background-size: cover;
     height: 100vh;
   }
@@ -43,26 +76,26 @@
     display: flex;
   }
   body header nav ul li {
-    border: 1px solid rgb(0, 87, 104);
+    border: 1px solid rgb(0, 69, 88);
     list-style: none;
     padding: 0.4vw;
     margin-right: 0.2vw;
     text-transform: capitalize;
     font-size: 4vw;
-    color: rgb(0, 87, 104);
+    color: rgb(0, 69, 88);
   }
   body header nav ul li:hover {
     background-color: white;
-    color: rgb(163, 128, 0);
-    border: 1px solid rgb(163, 128, 0);
+    color: #00b5be;
+    border: 1px solid #00b5be;
   }
   body form {
-    border: 1px solid rgb(0, 87, 104);
+    border: 1px solid rgb(0, 69, 88);
     padding: 0.4vw;
-    background-color: #cef7ff;
+    background-color: #bef1ff;
   }
   body form .buttom {
-    background-color: rgb(163, 128, 0);
+    background-color: #00b5be;
     color: white;
     padding: 0.5vw;
     border: none;
@@ -73,12 +106,12 @@
   }
   body form label {
     text-transform: capitalize;
-    border: 1px solid rgb(0, 87, 104);
+    border: 1px solid rgb(0, 69, 88);
     display: block;
     padding: 2vw;
     margin-bottom: 0.09765625vw;
     font-size: 4vw;
-    color: rgb(0, 87, 104);
+    color: rgb(0, 69, 88);
     display: flex;
     align-items: center;
     position: relative;
@@ -86,9 +119,9 @@
   body form label input {
     margin-left: 0.4vw;
     flex: 1;
-    border: 1px solid rgb(0, 87, 104);
+    border: 1px solid rgb(0, 69, 88);
     padding: 0.3vw;
-    color: rgb(0, 87, 104);
+    color: rgb(0, 69, 88);
     outline: none;
     font-size: 4vw;
     min-height: 8vw;
@@ -103,7 +136,7 @@
     left: 50%;
     transform: translateX(-50%);
     overflow-x: hidden;
-    background: linear-gradient(to bottom, rgb(0, 87, 104), #006072);
+    background: linear-gradient(to bottom, rgb(0, 69, 88), #004d62);
     background-size: cover;
     height: 100vh;
   }
@@ -117,26 +150,26 @@
     display: flex;
   }
   body header nav ul li {
-    border: 1px solid rgb(0, 87, 104);
+    border: 1px solid rgb(0, 69, 88);
     list-style: none;
     padding: 0.4vw;
     margin-right: 0.2vw;
     text-transform: capitalize;
     font-size: 2vw;
-    color: rgb(0, 87, 104);
+    color: rgb(0, 69, 88);
   }
   body header nav ul li:hover {
     background-color: white;
-    color: rgb(163, 128, 0);
-    border: 1px solid rgb(163, 128, 0);
+    color: #00b5be;
+    border: 1px solid #00b5be;
   }
   body form {
-    border: 1px solid rgb(0, 87, 104);
+    border: 1px solid rgb(0, 69, 88);
     padding: 0.4vw;
-    background-color: #cef7ff;
+    background-color: #bef1ff;
   }
   body form .buttom {
-    background-color: rgb(163, 128, 0);
+    background-color: #00b5be;
     color: white;
     padding: 0.5vw;
     display: inline-block;
@@ -145,21 +178,21 @@
   }
   body form label {
     text-transform: capitalize;
-    border: 1px solid rgb(0, 87, 104);
+    border: 1px solid rgb(0, 69, 88);
     display: block;
     padding: 0.5vw;
     margin-bottom: 0.09765625vw;
     font-size: 2vw;
-    color: rgb(0, 87, 104);
+    color: rgb(0, 69, 88);
     display: flex;
     align-items: center;
   }
   body form label input {
     margin-left: 0.4vw;
     flex: 1;
-    border: 1px solid rgb(0, 87, 104);
+    border: 1px solid rgb(0, 69, 88);
     padding: 0.3vw;
-    color: rgb(0, 87, 104);
+    color: rgb(0, 69, 88);
     outline: none;
     font-size: 2vw;
   }
@@ -172,7 +205,7 @@
     left: 50%;
     transform: translateX(-50%);
     overflow-x: hidden;
-    background: linear-gradient(to bottom, rgb(0, 87, 104), #006072);
+    background: linear-gradient(to bottom, rgb(0, 69, 88), #004d62);
     background-size: cover;
     height: 100vh;
   }
@@ -182,18 +215,18 @@
   }
   body table thead td {
     text-align: center;
-    color: rgb(0, 87, 104);
+    color: rgb(0, 69, 88);
     text-transform: capitalize;
-    border: 1px solid rgb(0, 87, 104);
+    border: 1px solid rgb(0, 69, 88);
   }
   body table tbody tr:nth-child(odd) {
-    background-color: #cef7ff; /* Cor de fundo clara */
+    background-color: #bef1ff; /* Cor de fundo clara */
   }
   body table tbody tr td {
     text-align: center;
-    color: rgb(0, 87, 104);
+    color: rgb(0, 69, 88);
     text-transform: capitalize;
-    border: 1px solid rgb(0, 87, 104);
+    border: 1px solid rgb(0, 69, 88);
   }
   body header {
     background-color: white;
@@ -210,25 +243,25 @@
     margin-right: 0.2vw;
     text-transform: capitalize;
     font-size: 1.2vw;
-    color: rgb(0, 87, 104);
+    color: rgb(0, 69, 88);
   }
   body header nav ul li:hover {
     background-color: white;
-    color: rgb(163, 128, 0);
+    color: #00b5be;
   }
   body form {
-    border: 1px solid rgb(0, 87, 104);
+    border: 1px solid rgb(0, 69, 88);
     padding: 0.4vw;
-    background-color: #cef7ff;
+    background-color: #f1fcff;
   }
   body form label {
     text-transform: capitalize;
-    border: 1px solid rgb(0, 87, 104);
+    border: 1px solid rgb(0, 69, 88);
     display: block;
     padding: 0.5vw;
     margin-bottom: 0.09765625vw;
     font-size: 1.2vw;
-    color: rgb(0, 87, 104);
+    color: rgb(0, 69, 88);
     display: flex;
     align-items: center;
     position: relative;
@@ -248,11 +281,23 @@
   body form label input {
     margin-left: 0.4vw;
     flex: 1;
-    border: 1px solid rgb(0, 87, 104);
+    border: 1px solid rgb(0, 69, 88);
     padding: 0.3vw;
-    color: rgb(0, 87, 104);
+    color: rgb(0, 69, 88);
     outline: none;
     font-size: 1.2vw;
+  }
+  body footer {
+    background-color: #befcff;
+  }
+  body footer #exportar {
+    padding: 1vw;
+    color: rgb(0, 69, 88);
+    display: flex;
+    align-items: center;
+    gap: 1.07421875vw;
+    font-size: 1.2vw;
+    text-transform: capitalize;
   }
 }
 .ue-sidebar-container {

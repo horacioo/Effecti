@@ -1,0 +1,25 @@
+@import "../cores/cores";
+@mixin icones() {
+    border-radius: 0.2vw;
+    background-image: url("../css/img/icones.svg");
+    background-size: cover;
+    width: 46px;
+    height: 46px;
+    display: inline-block;
+    border:1px solid $cor1;
+}
+
+
+
+.icon1 {
+    @include icones();
+    background-position-x: -0px;
+}
+.icon2 {
+    @include icones();
+    background-position-x: -56px;
+}
+.icon3 {
+    @include icones();
+    background-position-x: -114px;
+} 

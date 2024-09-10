@@ -1,7 +1,7 @@
 @import "cores/cores.scss";
 @import "mixins/tds";
 @import "classes/buttom";
-
+@import "classes/icones";
 
 @media (min-width: 10px) and (max-width: 500px) {
     $fontSize: 4vw;
@@ -168,20 +168,20 @@
         background-size: cover;
         height: 100vh;
 
-        table{
+        table {
             background-color: white;
             width: 100%;
-            thead{
-                td{
+            thead {
+                td {
                     @include td();
                 }
             }
-            tbody{
+            tbody {
                 tr:nth-child(odd) {
-                    background-color: lighten($cor1,70); /* Cor de fundo clara */
+                    background-color: lighten($cor1, 70); /* Cor de fundo clara */
                 }
-                tr{
-                    td{
+                tr {
+                    td {
                         @include td();
                     }
                 }
@@ -212,8 +212,7 @@
         form {
             border: 1px solid $cor1;
             padding: 0.4vw;
-            background-color: lighten($cor1, 70);
-            
+            background-color: lighten($cor1, 80);
 
             label {
                 text-transform: capitalize;
@@ -227,7 +226,7 @@
                 align-items: center;
                 position: relative;
 
-                .posicao{
+                .posicao {
                     z-index: 3;
                     padding: 1vw;
                     position: absolute;
@@ -236,8 +235,8 @@
                     left: 4.1vw;
                     text-align: center;
                 }
-                .alerta{
-                   display: none;
+                .alerta {
+                    display: none;
                 }
 
                 input {
@@ -251,13 +250,21 @@
                 }
             }
         }
+        footer {
+            background-color: lighten($cor2,50);
+            #exportar {
+                padding: 1vw;
+                color: $cor1;
+                display: flex;
+                align-items: center;
+                gap: 1.07421875vw;
+                font-size: $fontSize;
+                text-transform: capitalize;
+            }
+        }
     }
 }
 
 .ue-sidebar-container {
     display: none;
 }
-
-
-
-
