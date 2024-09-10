@@ -20,8 +20,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/Cadastro/Registra', [RegistrationController::class, 'salva'])->name("salvarCadastro");
-Route::get('/Cadastro/Email/Verifica', [RegistrationController::class, 'VerificaEmail'])->name("VerificaEmail");
-Route::get('/Cadastro/Cpf/Verifica', [RegistrationController::class, 'validaCPF'])->name("VerificaCpf");
-Route::put('/Cadastro/editar/commit', [RegistrationController::class, 'update'])->name("salvarEdicao");
-Route::get('/Cadastro/consultar', [RegistrationController::class, 'pesquisar'])->name("pesquisa");
+/**
+ * Grupo de rotas para cadastro e gerenciamento de registros.
+ */
+Route::prefix('Cadastro')->group(function () {
+    // Rota para registrar um novo cadastro
+    Route::post('/Registra', [RegistrationController::class, 'salva'])->name('salvarCadastro');
+
+    // Rota para verificar o e-mail durante o cadastro
+    Route::get('/Email/Verifica', [RegistrationController::class, 'VerificaEmail'])->name('VerificaEmail');
+
+    // Rota para validar o CPF durante o cadastro
+    Route::get('/Cpf/Verifica', [RegistrationController::class, 'validaCPF'])->name('VerificaCpf');
+
+    // Rota para atualizar um cadastro existente
+    Route::put('/editar/commit', [RegistrationController::class, 'update'])->name('salvarEdicao');
+
+    // Rota para pesquisar registros
+    Route::post('/consultar', [RegistrationController::class, 'pesquisar'])->name('pesquisa');
+});

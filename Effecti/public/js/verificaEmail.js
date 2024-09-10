@@ -29,15 +29,15 @@ function PesquisaEmail(email) {
             console.log(data.informacao); // Exibe os dados retornados pela API no console para depuração
             
             // Verifica se a informação retornada é "Email encontrado"
-            if (data.informacao === "Email encontrado") { 
+            if (data.sucesso === 0  ) { 
                 // Se o e-mail for encontrado, limpa o campo de e-mail
                 jQuery("#email").val('');
                 // Adiciona uma classe para exibir um alerta com a mensagem de erro
-                jQuery(".alerta").addClass('posicao').text("Email já existe, tente outro");
+                jQuery(".alerta").addClass('posicao').text("Email inválido ou já está em uso, tente outro por favor...");
                 // Remove a classe de alerta após 2 segundos
                 setTimeout(function() {
                     jQuery(".alerta").removeClass('posicao');
-                }, 2000); 
+                }, 3000); 
             } else {
                 // Se o e-mail não for encontrado, exibe uma mensagem no console para depuração
                 console.log('00');

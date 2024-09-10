@@ -16,13 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [RegistrationController::class, 'index'])->name('pdf.gerar');
+Route::get('/', [RegistrationController::class, 'index'])->name('home');
 
 // Agrupamento de rotas para cadastros
 Route::prefix('cadastros')->name('cadastro.')->group(function () {
     Route::get('/registrar', function () { return view('cadastro.cadastro'); })->name('registrar');
     Route::get('/pesquisar', function () { return view('cadastro.pesquisar');  })->name('pesquisar');
-
     Route::get('/lista', [RegistrationController::class, 'lista'])->name('lista');
     Route::get('/editar/{id}', [RegistrationController::class, 'editar'])->name('lista.editar');
     Route::delete('/deletar/{id}', [RegistrationController::class, 'deletar'])->name('deletar');

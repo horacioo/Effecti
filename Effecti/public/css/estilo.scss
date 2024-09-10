@@ -2,11 +2,14 @@
 @import "mixins/tds";
 @import "classes/buttom";
 @import "classes/icones";
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 @media (min-width: 10px) and (max-width: 500px) {
     $fontSize: 4vw;
+    
     body {
-        box-sizing: border-box;
+         box-sizing: border-box;
         max-width: 99vw;
         position: relative;
         overflow-x: hidden;
@@ -155,11 +158,25 @@
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media (min-width: 768px) {
     $fontSize: 1.2vw;
     body {
+        font-family: "Roboto Condensed", sans-serif;
         box-sizing: border-box;
-        max-width: 90vw;
+        max-width: 95vw;
         position: relative;
         left: 50%;
         transform: translateX(-50%);
@@ -178,7 +195,7 @@
             }
             tbody {
                 tr:nth-child(odd) {
-                    background-color: lighten($cor1, 70); /* Cor de fundo clara */
+                    background-color: lighten($cor1, 73); /* Cor de fundo clara */
                 }
                 tr {
                     td {
@@ -267,4 +284,8 @@
 
 .ue-sidebar-container {
     display: none;
+}
+.container{
+ background-color: lighten($cor1,73%);
+    min-height: 70vh;
 }

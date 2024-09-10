@@ -3,6 +3,10 @@ console.log("carregado");
 
 // Quando o documento estiver totalmente carregado
 jQuery(document).ready(function () {
+
+    //torno a div de id "exportar" invisível nesse momento por ser desnecessária aqui
+    jQuery('#exportar').hide();
+
     // Adiciona um ouvinte de eventos para o campo de pesquisa
     jQuery("#pesquisa").on("input", function () {
         var valor = jQuery(this).val(); // Obtém o valor do campo de pesquisa
@@ -22,7 +26,7 @@ function Pesquisar(valor) {
 
     jQuery.ajax({
         url: pesquisaURL, // URL da API para pesquisa
-        method: "GET", // Use 'POST' se você estiver enviando dados sensíveis ou grandes volumes de dados
+        method: "POST", // Use 'POST' se você estiver enviando dados sensíveis ou grandes volumes de dados
         dataType: "json", // Tipo de dados esperados na resposta
         data: { pesquisando: valor, key: chave }, // Parâmetro da pesquisa adicionado à URL como parâmetros de consulta
         success: function (response) {
@@ -69,10 +73,13 @@ function Pesquisar(valor) {
                             ", " +
                             item.estado +
                             "</td>"+
+                            "<td><a class='buttom' href="+urlEditarRegistro+item.id+">editar</td>"+
                             "</tr>"
                     );
                     i++;
                 });
+              //torno a div de id "exportar" visível agora
+              jQuery('#exportar').show();
             }
         },
         error: function (xhr, status, error) {

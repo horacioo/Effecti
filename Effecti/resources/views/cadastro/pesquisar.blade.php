@@ -2,8 +2,12 @@
 
 @section('header')
     <script>
-        var pesquisaURL = "{{ route('pesquisa') }}";
+        var pesquisaURL = "{{ route('pesquisa') }}"; /****Essa rota é a rota da api que será acessada quando eu for pesquisar****/
+        var urlEditarRegistro = "{{ route('home') }}/cadastros/editar/" 
+
+        console.log(urlEditarRegistro);
     </script>
+    
 @endsection
 
 @section('content')
