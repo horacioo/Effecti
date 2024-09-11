@@ -33,6 +33,10 @@ function PesquisaCpf(cpf) {
             } else {
                 // Se falso, exibe um alerta com a informação retornada pela API
                 alert(data.informacao);
+                //limpando o  campo de cpf SE for inválido
+                jQuery("#cpf").val(''); 
+                //colocando o ponteiro no campo do cpf
+                jQuery("#cpf").focus(); 
             }
         },
         error: function(xhr, status, error) {
