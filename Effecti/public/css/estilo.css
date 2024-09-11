@@ -1,4 +1,110 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+@media (min-width: 768px) and (max-width: 900000px) {
+  * {
+    font-size: 1vw;
+  }
+  body {
+    font-family: "Roboto Condensed", sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    overflow-x: hidden;
+    background: linear-gradient(to bottom, rgb(0, 70, 48), #005037);
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+    max-width: 100%;
+  }
+  body table {
+    background-color: white;
+    width: 100%;
+  }
+  body table thead td {
+    text-align: center;
+    color: rgb(0, 70, 48);
+    text-transform: capitalize;
+    border: 1px solid rgb(0, 70, 48);
+  }
+  body table tbody tr:nth-child(odd) {
+    background-color: #bbffea; /* Cor de fundo clara */
+  }
+  body table tbody tr td {
+    text-align: center;
+    color: rgb(0, 70, 48);
+    text-transform: capitalize;
+    border: 1px solid rgb(0, 70, 48);
+  }
+  body header {
+    background-color: white;
+  }
+  body header nav {
+    padding: 0.1vw;
+  }
+  body header nav ul {
+    display: flex;
+  }
+  body header nav ul li {
+    list-style: none;
+    padding: 0.4vw;
+    margin-right: 0.2vw;
+    text-transform: capitalize;
+    font-size: 1vw;
+    color: rgb(0, 70, 48);
+  }
+  body header nav ul li:hover {
+    background-color: white;
+    color: #00ac59;
+  }
+  body form {
+    border: 1px solid rgb(0, 70, 48);
+    padding: 0.4vw;
+    background-color: #dffff5;
+  }
+  body form label {
+    text-transform: capitalize;
+    border: 1px solid rgb(0, 70, 48);
+    display: block;
+    padding: 0.5vw;
+    margin-bottom: 0.09765625vw;
+    font-size: 1vw;
+    color: rgb(0, 70, 48);
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  body form label .posicao {
+    z-index: 3;
+    padding: 1vw;
+    position: absolute;
+    bottom: -0.2vw;
+    display: block !important;
+    left: 4.1vw;
+    text-align: center;
+  }
+  body form label .alerta {
+    display: none;
+  }
+  body form label input {
+    margin-left: 0.4vw;
+    flex: 1;
+    border: 1px solid rgb(0, 70, 48);
+    padding: 0.3vw;
+    color: rgb(0, 70, 48);
+    outline: none;
+    font-size: 1vw;
+  }
+  body footer {
+    background-color: #acffd7;
+  }
+  body footer #exportar {
+    padding: 1vw;
+    color: rgb(0, 70, 48);
+    display: flex;
+    align-items: center;
+    gap: 1.07421875vw;
+    font-size: 1vw;
+    text-transform: capitalize;
+  }
+}
 .buttom {
   background-color: rgb(0, 70, 48);
   border-radius: 0.2vw;
@@ -54,164 +160,20 @@
   background-position-x: -114px;
 }
 
-@media (min-width: 10px) and (max-width: 500px) {
-  body {
-    box-sizing: border-box;
-    max-width: 99vw;
-    position: relative;
-    overflow-x: hidden;
-    background: linear-gradient(to bottom, rgb(0, 70, 48), #005037);
-    background-size: cover;
-    height: 100vh;
-  }
-  body .container {
-    border: 1px solid white;
-  }
-  body header {
-    background-color: white;
-  }
-  body header nav {
-    padding: 0.1vw;
-  }
-  body header nav ul {
-    display: flex;
-  }
-  body header nav ul li {
-    border: 1px solid rgb(0, 70, 48);
-    list-style: none;
-    padding: 0.4vw;
-    margin-right: 0.2vw;
-    text-transform: capitalize;
-    font-size: 4vw;
-    color: rgb(0, 70, 48);
-  }
-  body header nav ul li:hover {
-    background-color: white;
-    color: #00ac59;
-    border: 1px solid #00ac59;
-  }
-  body form {
-    border: 1px solid rgb(0, 70, 48);
-    padding: 0.4vw;
-    background-color: #acffe5;
-  }
-  body form .buttom {
-    background-color: #00ac59;
-    color: white;
-    padding: 0.5vw;
-    border: none;
-    font-size: 4vw;
-    min-height: 9vw;
-    display: block;
-    width: 100%;
-  }
-  body form label {
-    text-transform: capitalize;
-    border: 1px solid rgb(0, 70, 48);
-    display: block;
-    padding: 2vw;
-    margin-bottom: 0.09765625vw;
-    font-size: 4vw;
-    color: rgb(0, 70, 48);
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-  body form label input {
-    margin-left: 0.4vw;
-    flex: 1;
-    border: 1px solid rgb(0, 70, 48);
-    padding: 0.3vw;
-    color: rgb(0, 70, 48);
-    outline: none;
-    font-size: 4vw;
-    min-height: 8vw;
-    min-height: 8vw;
-  }
-}
-@media (min-width: 501px) and (max-width: 767px) {
-  body {
-    box-sizing: border-box;
-    max-width: 90vw;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    overflow-x: hidden;
-    background: linear-gradient(to bottom, rgb(0, 70, 48), #005037);
-    background-size: cover;
-    height: 100vh;
-  }
-  body header {
-    background-color: white;
-  }
-  body header nav {
-    padding: 0.1vw;
-  }
-  body header nav ul {
-    display: flex;
-  }
-  body header nav ul li {
-    border: 1px solid rgb(0, 70, 48);
-    list-style: none;
-    padding: 0.4vw;
-    margin-right: 0.2vw;
-    text-transform: capitalize;
-    font-size: 2vw;
-    color: rgb(0, 70, 48);
-  }
-  body header nav ul li:hover {
-    background-color: white;
-    color: #00ac59;
-    border: 1px solid #00ac59;
-  }
-  body form {
-    border: 1px solid rgb(0, 70, 48);
-    padding: 0.4vw;
-    background-color: #acffe5;
-  }
-  body form .buttom {
-    background-color: #00ac59;
-    color: white;
-    padding: 0.5vw;
-    display: inline-block;
-    border: none;
-    font-size: 2vw;
-  }
-  body form label {
-    text-transform: capitalize;
-    border: 1px solid rgb(0, 70, 48);
-    display: block;
-    padding: 0.5vw;
-    margin-bottom: 0.09765625vw;
-    font-size: 2vw;
-    color: rgb(0, 70, 48);
-    display: flex;
-    align-items: center;
-  }
-  body form label input {
-    margin-left: 0.4vw;
-    flex: 1;
-    border: 1px solid rgb(0, 70, 48);
-    padding: 0.3vw;
-    color: rgb(0, 70, 48);
-    outline: none;
-    font-size: 2vw;
-  }
-}
-@media (min-width: 768px) {
+@media (min-width: 0px) and (max-width: 299px) {
   body {
     font-family: "Roboto Condensed", sans-serif;
     box-sizing: border-box;
-    max-width: 95vw;
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
     overflow-x: hidden;
-    background: linear-gradient(to bottom, rgb(0, 70, 48), #005037);
+    background-color: #46ffc5;
     background-size: cover;
     height: 100vh;
+    margin: 0;
+    max-width: 85.5vw;
   }
   body table {
+    font-size: 0.05em;
     background-color: white;
     width: 100%;
   }
@@ -224,12 +186,6 @@
   body table tbody tr:nth-child(odd) {
     background-color: #bbffea; /* Cor de fundo clara */
   }
-  body table tbody tr td {
-    text-align: center;
-    color: rgb(0, 70, 48);
-    text-transform: capitalize;
-    border: 1px solid rgb(0, 70, 48);
-  }
   body header {
     background-color: white;
   }
@@ -244,7 +200,7 @@
     padding: 0.4vw;
     margin-right: 0.2vw;
     text-transform: capitalize;
-    font-size: 1.2vw;
+    font-size: 2.7vw;
     color: rgb(0, 70, 48);
   }
   body header nav ul li:hover {
@@ -262,7 +218,7 @@
     display: block;
     padding: 0.5vw;
     margin-bottom: 0.09765625vw;
-    font-size: 1.2vw;
+    font-size: 2.7vw;
     color: rgb(0, 70, 48);
     display: flex;
     align-items: center;
@@ -287,7 +243,7 @@
     padding: 0.3vw;
     color: rgb(0, 70, 48);
     outline: none;
-    font-size: 1.2vw;
+    font-size: 2.7vw;
   }
   body footer {
     background-color: #acffd7;
@@ -298,15 +254,207 @@
     display: flex;
     align-items: center;
     gap: 1.07421875vw;
-    font-size: 1.2vw;
+    font-size: 2.7vw;
+    text-transform: capitalize;
+  }
+}
+@media (min-width: 300px) and (max-width: 499px) {
+  body {
+    font-family: "Roboto Condensed", sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    overflow-x: hidden;
+    background-color: #46ffc5;
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+    width: 100%;
+  }
+  body table {
+    font-size: 0.2em;
+    background-color: white;
+    width: 100%;
+  }
+  body table thead td {
+    text-align: center;
+    color: rgb(0, 70, 48);
+    text-transform: capitalize;
+    border: 1px solid rgb(0, 70, 48);
+  }
+  body table tbody tr:nth-child(odd) {
+    background-color: #bbffea; /* Cor de fundo clara */
+  }
+  body header {
+    background-color: white;
+  }
+  body header nav {
+    padding: 0.1vw;
+  }
+  body header nav ul {
+    display: flex;
+  }
+  body header nav ul li {
+    list-style: none;
+    padding: 0.4vw;
+    margin-right: 0.2vw;
+    text-transform: capitalize;
+    font-size: 4vw;
+    color: rgb(0, 70, 48);
+  }
+  body header nav ul li:hover {
+    background-color: white;
+    color: #00ac59;
+  }
+  body form {
+    border: 1px solid rgb(0, 70, 48);
+    padding: 0.4vw;
+    background-color: #dffff5;
+  }
+  body form label {
+    text-transform: capitalize;
+    border: 1px solid rgb(0, 70, 48);
+    display: block;
+    padding: 0.5vw;
+    margin-bottom: 0.09765625vw;
+    font-size: 4vw;
+    color: rgb(0, 70, 48);
+    display: flex;
+    align-items: center;
+    position: relative;
+    max-width: 85.3vw;
+  }
+  body form label .posicao {
+    z-index: 3;
+    padding: 1vw;
+    position: absolute;
+    bottom: -0.2vw;
+    display: block !important;
+    left: 4.1vw;
+    text-align: center;
+  }
+  body form label .alerta {
+    display: none;
+  }
+  body form label input {
+    margin-left: 0.4vw;
+    flex: 1;
+    border: 1px solid rgb(0, 70, 48);
+    padding: 0.3vw;
+    color: rgb(0, 70, 48);
+    outline: none;
+    font-size: 4vw;
+  }
+  body footer {
+    background-color: #acffd7;
+  }
+  body footer #exportar {
+    padding: 1vw;
+    color: rgb(0, 70, 48);
+    display: flex;
+    align-items: center;
+    gap: 1.07421875vw;
+    font-size: 4vw;
+    text-transform: capitalize;
+  }
+}
+@media (min-width: 500px) and (max-width: 767px) {
+  body {
+    font-family: "Roboto Condensed", sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    overflow-x: hidden;
+    background-color: #46ffc5;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+  }
+  body table {
+    font-size: 0.5em;
+    background-color: white;
+    width: 100%;
+  }
+  body table thead td {
+    text-align: center;
+    color: rgb(0, 70, 48);
+    text-transform: capitalize;
+    border: 1px solid rgb(0, 70, 48);
+  }
+  body table tbody tr:nth-child(odd) {
+    background-color: #bbffea; /* Cor de fundo clara */
+  }
+  body header {
+    background-color: white;
+  }
+  body header nav {
+    padding: 0.1vw;
+  }
+  body header nav ul {
+    display: flex;
+  }
+  body header nav ul li {
+    list-style: none;
+    padding: 0.4vw;
+    margin-right: 0.2vw;
+    text-transform: capitalize;
+    font-size: 2.6vw;
+    color: rgb(0, 70, 48);
+  }
+  body header nav ul li:hover {
+    background-color: white;
+    color: #00ac59;
+  }
+  body form {
+    border: 1px solid rgb(0, 70, 48);
+    padding: 0.4vw;
+    background-color: #dffff5;
+  }
+  body form label {
+    text-transform: capitalize;
+    border: 1px solid rgb(0, 70, 48);
+    display: block;
+    padding: 0.5vw;
+    margin-bottom: 0.09765625vw;
+    font-size: 2.6vw;
+    color: rgb(0, 70, 48);
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  body form label .posicao {
+    z-index: 3;
+    padding: 1vw;
+    position: absolute;
+    bottom: -0.2vw;
+    display: block !important;
+    left: 4.1vw;
+    text-align: center;
+  }
+  body form label .alerta {
+    display: none;
+  }
+  body form label input {
+    margin-left: 0.4vw;
+    flex: 1;
+    border: 1px solid rgb(0, 70, 48);
+    padding: 0.3vw;
+    color: rgb(0, 70, 48);
+    outline: none;
+    font-size: 2.6vw;
+  }
+  body footer {
+    background-color: #acffd7;
+  }
+  body footer #exportar {
+    padding: 1vw;
+    color: rgb(0, 70, 48);
+    display: flex;
+    align-items: center;
+    gap: 1.07421875vw;
+    font-size: 2.6vw;
     text-transform: capitalize;
   }
 }
 .ue-sidebar-container {
   display: none;
-}
-
-.container {
-  background-color: #bbffea;
-  min-height: 70vh;
 }/*# sourceMappingURL=estilo.css.map */

@@ -1,0 +1,448 @@
+@mixin Geral() {
+    @media (min-width: 0px) and (max-width: 299px) {
+        $fontSize: 2.7vw;
+
+        body {
+            font-family: "Roboto Condensed", sans-serif;
+            box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
+            background-color: lighten($cor1, 50);
+            background-size: cover;
+            height: 100vh;
+            margin: 0;
+            max-width: 85.5vw;
+
+            table {
+                font-size: 0.05em;
+                background-color: white;
+                width: 100%;
+                thead {
+                    td {
+                        @include td();
+                    }
+                }
+                tbody {
+                    tr:nth-child(odd) {
+                        background-color: lighten($cor1, 73); /* Cor de fundo clara */
+                    }
+                    tr {
+                        td {
+                        }
+                    }
+                }
+            }
+
+            header {
+                background-color: white;
+                nav {
+                    padding: 0.1vw;
+                    ul {
+                        display: flex;
+                        li {
+                            list-style: none;
+                            padding: 0.4vw;
+                            margin-right: 0.2vw;
+                            text-transform: capitalize;
+                            font-size: $fontSize;
+                            color: $cor1;
+                            &:hover {
+                                background-color: lighten($cor2, 70);
+                                color: $cor2;
+                            }
+                        }
+                    }
+                }
+            }
+            form {
+                border: 1px solid $cor1;
+                padding: 0.4vw;
+                background-color: lighten($cor1, 80);
+
+                label {
+                    text-transform: capitalize;
+                    border: 1px solid $cor1;
+                    display: block;
+                    padding: 0.5vw;
+                    margin-bottom: 0.09765625vw;
+                    font-size: $fontSize;
+                    color: $cor1;
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+
+                    .posicao {
+                        z-index: 3;
+                        padding: 1vw;
+                        position: absolute;
+                        bottom: -0.2vw;
+                        display: block !important;
+                        left: 4.1vw;
+                        text-align: center;
+                    }
+                    .alerta {
+                        display: none;
+                    }
+
+                    input {
+                        margin-left: 0.4vw;
+                        flex: 1;
+                        border: 1px solid $cor1;
+                        padding: 0.3vw;
+                        color: $cor1;
+                        outline: none;
+                        font-size: $fontSize;
+                    }
+                }
+            }
+            footer {
+                background-color: lighten($cor2, 50);
+                #exportar {
+                    padding: 1vw;
+                    color: $cor1;
+                    display: flex;
+                    align-items: center;
+                    gap: 1.07421875vw;
+                    font-size: $fontSize;
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+  
+    @media (min-width: 300px) and (max-width: 499px) {
+        $fontSize: 4vw;
+
+        body {
+            font-family: "Roboto Condensed", sans-serif;
+            box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
+            background-color: lighten($cor1, 50);
+            background-size: cover;
+            height: 100vh;
+            margin: 0;
+            width: 100%;
+            table {
+                font-size: 0.2em;
+                background-color: white;
+                width: 100%;
+                thead {
+                    td {
+                        @include td();
+                    }
+                }
+                tbody {
+                    tr:nth-child(odd) {
+                        background-color: lighten($cor1, 73); /* Cor de fundo clara */
+                    }
+                    tr {
+                        td {
+                        }
+                    }
+                }
+            }
+
+            header {
+                background-color: white;
+                nav {
+                    padding: 0.1vw;
+                    ul {
+                        display: flex;
+                        li {
+                            list-style: none;
+                            padding: 0.4vw;
+                            margin-right: 0.2vw;
+                            text-transform: capitalize;
+                            font-size: $fontSize;
+                            color: $cor1;
+                            &:hover {
+                                background-color: lighten($cor2, 70);
+                                color: $cor2;
+                            }
+                        }
+                    }
+                }
+            }
+            form {
+                border: 1px solid $cor1;
+                padding: 0.4vw;
+                background-color: lighten($cor1, 80);
+
+                label {
+                    text-transform: capitalize;
+                    border: 1px solid $cor1;
+                    display: block;
+                    padding: 0.5vw;
+                    margin-bottom: 0.09765625vw;
+                    font-size: $fontSize;
+                    color: $cor1;
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                    max-width: 85.3vw;
+
+                    .posicao {
+                        z-index: 3;
+                        padding: 1vw;
+                        position: absolute;
+                        bottom: -0.2vw;
+                        display: block !important;
+                        left: 4.1vw;
+                        text-align: center;
+                    }
+                    .alerta {
+                        display: none;
+                    }
+
+                    input {
+                        margin-left: 0.4vw;
+                        flex: 1;
+                        border: 1px solid $cor1;
+                        padding: 0.3vw;
+                        color: $cor1;
+                        outline: none;
+                        font-size: $fontSize;
+                    }
+                }
+            }
+            footer {
+                background-color: lighten($cor2, 50);
+                #exportar {
+                    padding: 1vw;
+                    color: $cor1;
+                    display: flex;
+                    align-items: center;
+                    gap: 1.07421875vw;
+                    font-size: $fontSize;
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+
+    @media (min-width: 500px) and (max-width: 767px) {
+        $fontSize: 2.6vw;
+
+        body {
+            font-family: "Roboto Condensed", sans-serif;
+            box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
+            background-color: lighten($cor1, 50);
+            background-size: cover;
+            height: 100vh;
+            width: 100%;
+            margin: 0;
+            table {
+                font-size: 0.5em;
+                background-color: white;
+                width: 100%;
+                thead {
+                    td {
+                        @include td();
+                    }
+                }
+                tbody {
+                    tr:nth-child(odd) {
+                        background-color: lighten($cor1, 73); /* Cor de fundo clara */
+                    }
+                    tr {
+                        td {
+                        }
+                    }
+                }
+            }
+
+            header {
+                background-color: white;
+                nav {
+                    padding: 0.1vw;
+                    ul {
+                        display: flex;
+                        li {
+                            list-style: none;
+                            padding: 0.4vw;
+                            margin-right: 0.2vw;
+                            text-transform: capitalize;
+                            font-size: $fontSize;
+                            color: $cor1;
+                            &:hover {
+                                background-color: lighten($cor2, 70);
+                                color: $cor2;
+                            }
+                        }
+                    }
+                }
+            }
+            form {
+                border: 1px solid $cor1;
+                padding: 0.4vw;
+                background-color: lighten($cor1, 80);
+
+                label {
+                    text-transform: capitalize;
+                    border: 1px solid $cor1;
+                    display: block;
+                    padding: 0.5vw;
+                    margin-bottom: 0.09765625vw;
+                    font-size: $fontSize;
+                    color: $cor1;
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+
+                    .posicao {
+                        z-index: 3;
+                        padding: 1vw;
+                        position: absolute;
+                        bottom: -0.2vw;
+                        display: block !important;
+                        left: 4.1vw;
+                        text-align: center;
+                    }
+                    .alerta {
+                        display: none;
+                    }
+
+                    input {
+                        margin-left: 0.4vw;
+                        flex: 1;
+                        border: 1px solid $cor1;
+                        padding: 0.3vw;
+                        color: $cor1;
+                        outline: none;
+                        font-size: $fontSize;
+                    }
+                }
+            }
+            footer {
+                background-color: lighten($cor2, 50);
+                #exportar {
+                    padding: 1vw;
+                    color: $cor1;
+                    display: flex;
+                    align-items: center;
+                    gap: 1.07421875vw;
+                    font-size: $fontSize;
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 900000px) {
+    $fontSize: 1vw;
+    * {
+        font-size: $fontSize;
+    }
+    body {
+        font-family: "Roboto Condensed", sans-serif;
+        box-sizing: border-box;
+        position: relative;
+        //left: 50%;
+        //transform: translateX(-50%);
+        overflow-x: hidden;
+        background: linear-gradient(to bottom, $cor1, lighten($cor1, 2));
+        background-size: cover;
+        height: 100vh;
+        margin: 0;
+        max-width:100%;
+
+        table {
+            background-color: white;
+            width: 100%;
+            thead {
+                td {
+                    @include td();
+                }
+            }
+            tbody {
+                tr:nth-child(odd) {
+                    background-color: lighten($cor1, 73); /* Cor de fundo clara */
+                }
+                tr {
+                    td {
+                        @include td();
+                    }
+                }
+            }
+        }
+
+        header {
+            background-color: white;
+            nav {
+                padding: 0.1vw;
+                ul {
+                    display: flex;
+                    li {
+                        list-style: none;
+                        padding: 0.4vw;
+                        margin-right: 0.2vw;
+                        text-transform: capitalize;
+                        font-size: $fontSize;
+                        color: $cor1;
+                        &:hover {
+                            background-color: lighten($cor2, 70);
+                            color: $cor2;
+                        }
+                    }
+                }
+            }
+        }
+        form {
+            border: 1px solid $cor1;
+            padding: 0.4vw;
+            background-color: lighten($cor1, 80);
+
+            label {
+                text-transform: capitalize;
+                border: 1px solid $cor1;
+                display: block;
+                padding: 0.5vw;
+                margin-bottom: 0.09765625vw;
+                font-size: $fontSize;
+                color: $cor1;
+                display: flex;
+                align-items: center;
+                position: relative;
+
+                .posicao {
+                    z-index: 3;
+                    padding: 1vw;
+                    position: absolute;
+                    bottom: -0.2vw;
+                    display: block !important;
+                    left: 4.1vw;
+                    text-align: center;
+                }
+                .alerta {
+                    display: none;
+                }
+
+                input {
+                    margin-left: 0.4vw;
+                    flex: 1;
+                    border: 1px solid $cor1;
+                    padding: 0.3vw;
+                    color: $cor1;
+                    outline: none;
+                    font-size: $fontSize;
+                }
+            }
+        }
+        footer {
+            background-color: lighten($cor2, 50);
+            #exportar {
+                padding: 1vw;
+                color: $cor1;
+                display: flex;
+                align-items: center;
+                gap: 1.07421875vw;
+                font-size: $fontSize;
+                text-transform: capitalize;
+            }
+        }
+    }
+}
